@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Defines the install/uninstall hooks for this module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_pdfjs_reader_uninstall() {
+  $variables = array();
+  // Delete the Drupal variables defined by this module.
+  array_walk($variables, 'variable_del');
+}
