@@ -63,6 +63,7 @@ function islandora_pdfjs_reader_islandora_viewer_info() {
  * @return string
  *   HTML repersentation of the pdf.js Reader.
  */
-function islandora_pdfjs_reader_viewer_callback(array $params) {
+function islandora_pdfjs_reader_viewer_callback(array $params, $fedora_object = NULL) {
+  $params['object'] = $fedora_object;
   return theme('islandora_pdfjs_reader', $params);
 }

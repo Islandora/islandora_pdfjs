@@ -3,10 +3,10 @@
 /**
  * @file
  *
- * Theme for the pdf.js Reader.
+ * Theme template file for the islandora pdf.js Reader.
  */
 
 ?>
 <div id="islandora-pdfjs-reader">
-  islandora-pdfjs.tpl
+  <?php print $islandora_pdfjs_reader; ?>
 </div>
