@@ -11,7 +11,7 @@ CONTENTS OF THIS FILE
 SUMMARY
 -------
 
-A Islandora wrapper for the pdf.js reader.
+A Islandora wrapper for the Mozilla pdf.js reader.
 The source code license is AGPL v3, as described in the LICENSE file.
 
 This module doesn't do much on its own, its assumed that it will be used in
@@ -24,7 +24,7 @@ REQUIREMENTS
 INSTALLATION
 ------------
 
-Download the pdf.js reader to sites/all/libraries/pdf.js.
+Download the pdf.js reader to sites/all/libraries/pdfjs.
 
 Developer documentation:
 http://mozilla.github.io/pdf.js/
