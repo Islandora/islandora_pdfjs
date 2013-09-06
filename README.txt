@@ -5,8 +5,8 @@ CONTENTS OF THIS FILE
  * summary
  * requirements
  * installation
- * configuration
  * troubleshooting
+ * todo
 
 SUMMARY
 -------
@@ -20,20 +20,20 @@ conjunction with a solution pack, where it will be provided as a viewer.
 REQUIREMENTS
 ------------
 
+pdf.js
 
 INSTALLATION
 ------------
 
 Download the pdf.js reader to sites/all/libraries/pdfjs.
+Enable Islandora pdf.js Reader module.
+Select the pdf.js reader under the PDF collection configuration "<drupal site>admin/islandora/pdf"
 
 Developer documentation:
 http://mozilla.github.io/pdf.js/
 
 Hosted source code:
 https://github.com/mozilla/pdf.js
-
-CONFIGURATION
--------------
 
 
 TROUBLESHOOTING
@@ -47,3 +47,17 @@ https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora
 
 Islandora Dev Group:
 https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora-dev
+
+Islandora irc Group
+
+#islandora on irc.freenode.net
+
+pdf.js irc Group
+
+#pdfjs on irc.mozilla.org
+
+
+TODO
+----
+
+Look into displaying viewer without iframe.
