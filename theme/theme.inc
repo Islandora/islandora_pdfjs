@@ -22,7 +22,7 @@ function islandora_pdfjs_reader_preprocess_islandora_pdfjs_reader(array &$variab
     $dsid = 'PDF';
   }
   $file_url = url("islandora/object/{$fedora_object->id}/datastream/$dsid/view", array('absolute' => TRUE));
-  $viewer_url = url(libraries_get_path('pdfjs').'/web/viewer.html', array('absolute' => TRUE, 'query' => array('file' => $file_url)));
+  $viewer_url = url(libraries_get_path('pdfjs') . '/web/viewer.html', array('absolute' => TRUE, 'query' => array('file' => $file_url)));
   $viewer = <<<HTML
   <iframe class="pdf" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="no" width="99%" height="800px"
     src="$viewer_url">$file_url</iframe>
