@@ -8,5 +8,5 @@
 
 ?>
 <div id="islandora-pdfjs-reader">
-  <?php print $islandora_pdfjs_reader; ?>
+  <iframe class="pdf" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="no" width="99%" height="800px" src="<?php print $viewer_url; ?>"><?php print $file_url; ?></iframe>
 </div>
