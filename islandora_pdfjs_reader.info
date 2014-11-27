@@ -1,8 +1,0 @@
-name = "Islandora pdf.js Reader"
-description = "Implements the Mozilla pdf.js Reader for use with Islandora."
-dependencies[] = libraries
-dependencies[] = islandora
-package = Islandora
-version = 7.x-dev
-core = 7.x
-php = 5.3
