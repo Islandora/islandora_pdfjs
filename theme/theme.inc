@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_theme().
  */
-function islandora_pdfjs_reader_preprocess_islandora_pdfjs_reader(array &$variables) {
+function islandora_pdfjs_preprocess_islandora_pdfjs(array &$variables) {
   $fedora_object = $variables['fedora_object'];
 
   if (isset($fedora_object['OBJ']) && $fedora_object['OBJ']->mimetype == 'application/pdf') {
