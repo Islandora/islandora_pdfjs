@@ -43,4 +43,4 @@ If you would like to contribute to this module, please check out our helpful [Do
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-**Note** This module requires PDF.js. PDF.js is licensed under an [Apache2 License](https://github.com/videojs/video.js/blob/master/LICENSE)
+**Note** This module requires PDF.js. PDF.js is licensed under an [Apache2 License](https://github.com/mozilla/pdf.js/blob/master/LICENSE)
