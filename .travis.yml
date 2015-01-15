@@ -19,7 +19,7 @@ before_install:
   - ln -s $TRAVIS_BUILD_DIR sites/all/modules/islandora_pdfjs
   - drush en --yes islandora_pdfjs
 script:
-  - ant -buildfile sites/all/modules/islandora_videojs/build.xml lint
+  - ant -buildfile sites/all/modules/islandora_pdfjs/build.xml lint
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_pdfjs
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_pdfjs
   - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_pdfjs
