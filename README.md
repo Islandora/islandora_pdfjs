@@ -17,6 +17,8 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 [Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install [PDF.js](http://mozilla.github.io/pdf.js) to your sites/libraries folder, or run `drush pdfjs-plugin`. 
 
+Note: If you use the Drush command, it is advisable to Move (not copy) the install script to your `.drush` folder and run it.
+
 ## Configuration
 
 Select the PDF.js viewer at Administration » Islandora » Solution pack configuration » PDF Solution Pack (admin/islandora/solution_pack_config/pdf).
