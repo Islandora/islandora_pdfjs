@@ -15,7 +15,7 @@ An Islandora viewer module using [Mozilla PDF.js](http://mozilla.github.io/pdf.j
 
 Install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
 
-[Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install [PDF.js](http://mozilla.github.io/pdf.js) to your sites/libraries folder.
+[Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install [PDF.js](http://mozilla.github.io/pdf.js) to your sites/libraries folder, or run `drush pdfjs-plugin`. 
 
 ## Configuration
 
