@@ -38,7 +38,7 @@ function islandora_pdfjs_islandora_viewer_info() {
       'description' => t('Mozilla pdf.js Reader.'),
       'configuration' => '',
       'callback' => 'islandora_pdfjs_viewer_callback',
-      'model' => array('islandora:sp_pdf'),
+      'model' => array('islandora:sp_pdf', 'islandora:bookCModel', 'islandora:pageCModel'),
       'mimetype' => array('application/pdf'),
     ),
   );
