@@ -15,13 +15,18 @@ An Islandora viewer module using [Mozilla PDF.js](http://mozilla.github.io/pdf.j
 
 Install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
 
-[Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install [PDF.js](http://mozilla.github.io/pdf.js) to your sites/libraries folder, or run `drush pdfjs-plugin`. 
+[Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install [PDF.js](http://mozilla.github.io/pdf.js) to your sites/libraries/pdfjs folder, or run `drush pdfjs-plugin`. 
 
 Note: If you use the Drush command, it is advisable to Move (not copy) the install script to your `.drush` folder and run it.
 
 ## Configuration
 
-Select the PDF.js viewer at Administration » Islandora » Solution pack configuration » PDF Solution Pack (admin/islandora/solution_pack_config/pdf).
+Currently the PDF.js viewer can be used as the viewer for:
+
+* the PDF Solution Pack 
+   * Administration » Islandora » Solution pack configuration » PDF Solution Pack (admin/islandora/solution_pack_config/pdf).
+* the Book Solution Pack (both the book and the page object are options)
+   * Administration  » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
 
 ## Troubleshooting/Issues
 
