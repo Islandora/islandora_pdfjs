@@ -11,6 +11,11 @@
 define('PDFJS_DOWNLOAD_URI', 'https://github.com/mozilla/pdf.js/releases/download/v1.0.907/pdfjs-1.0.907-dist.zip');
 
 /**
+ * The initial PDF.js directory
+ */
+define('PDFJS_ORIGINAL_DIR', 'pdfjs');
+
+/**
  * Implements hook_drush_command().
  */
 function islandora_pdfjs_drush_command() {
@@ -48,7 +53,7 @@ function drush_islandora_pdfjs_plugin() {
     $path = $args[0];
   }
   else {
-    $path = 'sites/all/libraries';
+    $path = _drush_core_directory("@site:sites/all/libraries");
   }
 
   // Create the path if it does not exist.
@@ -64,22 +69,23 @@ function drush_islandora_pdfjs_plugin() {
   // Download the zip archive.
   if ($filepath = drush_download_file(PDFJS_DOWNLOAD_URI)) {
     $filename = basename($filepath);
-    $dirname = 'pdf-js';
+    $dirname = PDFJS_ORIGINAL_DIR;
+    $pathdir = $path . '/' . $dirname;
 
     // Remove any existing PDF.js plugin directory.
-    if (is_dir($dirname) || is_dir('pdf-js')) {
+    if (is_dir($dirname) || is_dir('pdfjs')) {
       drush_delete_dir($dirname, TRUE);
-      drush_delete_dir('pdf-js', TRUE);
+      drush_delete_dir('pdfjs', TRUE);
       drush_log(dt('A existing PDF.js plugin was deleted from @path', array('@path' => $path)), 'notice');
     }
 
     // Decompress the zip archive.
-    drush_tarball_extract($filename);
+    drush_tarball_extract($filename, $pathdir);
 
-    // Change the directory name to "pdf-js" if needed.
-    if ($dirname != 'pdf-js') {
-      drush_move_dir($dirname, 'pdf-js', TRUE);
-      $dirname = 'pdf-js';
+    // Change the directory name to "pdfjs" if needed.
+    if ($dirname != 'pdfjs') {
+      drush_move_dir($dirname, 'pdfjs', TRUE);
+      $dirname = 'pdfjs';
     }
   }
 
