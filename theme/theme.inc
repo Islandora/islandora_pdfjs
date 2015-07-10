@@ -10,14 +10,11 @@
  */
 function islandora_pdfjs_preprocess_islandora_pdfjs(array &$variables) {
   $fedora_object = $variables['fedora_object'];
+  $dsid = (isset($variables['dsid']) ? $variables['dsid'] : NULL);
 
-  if (isset($fedora_object['OBJ']) && $fedora_object['OBJ']->mimetype == 'application/pdf') {
-    $dsid = 'OBJ';
+  if ($dsid) {
+    $file_url = url("islandora/object/{$fedora_object->id}/datastream/$dsid/view", array('absolute' => TRUE));
+    $variables['file_url'] = $file_url;
+    $variables['viewer_url'] = url(libraries_get_path('pdfjs') . '/web/viewer.html', array('absolute' => TRUE, 'query' => array('file' => $file_url)));
   }
-  else {
-    $dsid = 'PDF';
-  }
-  $file_url = url("islandora/object/{$fedora_object->id}/datastream/$dsid/view", array('absolute' => TRUE));
-  $variables['file_url'] = $file_url;
-  $variables['viewer_url'] = url(libraries_get_path('pdfjs') . '/web/viewer.html', array('absolute' => TRUE, 'query' => array('file' => $file_url)));
 }

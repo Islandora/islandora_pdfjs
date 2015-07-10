@@ -16,6 +16,7 @@ function islandora_pdfjs_theme() {
       'template' => 'theme/islandora-pdfjs',
       'variables' => array(
         'fedora_object' => NULL,
+        'dsid' => NULL,
       ),
     ),
     'viewer' => array(
@@ -53,9 +54,26 @@ function islandora_pdfjs_islandora_viewer_info() {
  * @param array $params
  *   The params for the theme function 'islandora_pdfjs'.
  *
+ * @param IslandoraAbstractObject $fedora_object
+ *   The object that we are viewing.
+ *
  * @return string
  *   HTML repersentation of the pdf.js Reader.
  */
 function islandora_pdfjs_viewer_callback(array $params, $fedora_object = NULL) {
-  return theme('islandora_pdfjs', array('fedora_object' => $fedora_object));
+  $dsid = NULL;
+  if (isset($params['dsid']) && !empty($params['dsid']) && isset($fedora_object[$dsid])) {
+    $dsid = $params['dsid'];
+  }
+  else {
+    if (isset($fedora_object['PDF'])) {
+      $dsid = 'PDF';
+    }
+    elseif (isset($fedora_object['OBJ']) && $fedora_object['OBJ']->mimetype == 'application/pdf') {
+      $dsid = 'OBJ';
+    }
+  }
+  if ($dsid && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $fedora_object[$dsid])) {
+    return theme('islandora_pdfjs', array('fedora_object' => $fedora_object, 'dsid' => $dsid));
+  }
 }
