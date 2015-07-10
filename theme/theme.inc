@@ -13,8 +13,14 @@ function islandora_pdfjs_preprocess_islandora_pdfjs(array &$variables) {
   $dsid = (isset($variables['dsid']) ? $variables['dsid'] : NULL);
 
   if ($dsid) {
-    $file_url = url("islandora/object/{$fedora_object->id}/datastream/$dsid/view", array('absolute' => TRUE));
+    $file_url = file_create_url("islandora/object/{$fedora_object->id}/datastream/$dsid/view");
     $variables['file_url'] = $file_url;
-    $variables['viewer_url'] = url(libraries_get_path('pdfjs') . '/web/viewer.html', array('absolute' => TRUE, 'query' => array('file' => $file_url)));
+    $lib_path = libraries_get_path('pdfjs');
+    $variables['viewer_url'] = url(file_create_url("$lib_path/web/viewer.html"), array(
+      'external' => TRUE,
+      'query' => array(
+        'file' => $file_url,
+      ),
+    ));
   }
 }
