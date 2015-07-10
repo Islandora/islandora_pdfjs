@@ -17,6 +17,7 @@ function islandora_pdfjs_preprocess_islandora_pdfjs(array &$variables) {
     $variables['file_url'] = $file_url;
     $lib_path = libraries_get_path('pdfjs');
     $variables['viewer_url'] = url(file_create_url("$lib_path/web/viewer.html"), array(
+      'external' => TRUE,
       'query' => array(
         'file' => $file_url,
       ),
