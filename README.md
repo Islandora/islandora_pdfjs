@@ -4,7 +4,6 @@
 
 An Islandora viewer module using [Mozilla PDF.js](http://mozilla.github.io/pdf.js/).
 
-
 ## Requirements
 
 * [Islandora](https://github.com/islandora/islandora)
@@ -28,6 +27,10 @@ Currently the PDF.js viewer can be used as the viewer for:
 * the Book Solution Pack (both the book and the page object are options)
    * Administration  » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
 
+## Documentation
+
+Further documentation for this module is available at [our wiki](https://wiki.duraspace.org/display/ISLANDORA/Islandora+PDF.js).
+
 ## Troubleshooting/Issues
 
 Having problems or solved a problem? Check out the Islandora google groups for a solution.
@@ -43,7 +46,7 @@ Current maintainers:
 
 ## Development
 
-If you would like to contribute to this module, please check out our helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the Islandora.ca site.
+If you would like to contribute to this module, please check out [CONTRIBUTING.md](CONTRIBUTING.md). In addition, we have helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the [Islandora.ca](http://islandora.ca) site.
 
 ## License
 
