@@ -42,7 +42,8 @@ function islandora_pdfjs_islandora_viewer_info() {
       'model' => array(
         'islandora:sp_pdf',
         'islandora:bookCModel',
-        'islandora:pageCModel'),
+        'islandora:pageCModel',
+        'islandora:newspaperIssueCModel'),
       'mimetype' => array('application/pdf'),
     ),
   );
