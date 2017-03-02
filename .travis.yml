@@ -27,4 +27,3 @@ script:
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_pdfjs
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_pdfjs
   - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_pdfjs
-  - drush test-run --uri=http://localhost:8081 "Islandora PDF.js"
