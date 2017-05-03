@@ -6,9 +6,9 @@
  */
 
 /**
- * Implements hook_preprocess_theme().
+ * Implements template_preprocess_HOOK().
  */
-function islandora_pdfjs_preprocess_islandora_pdfjs(array &$variables) {
+function template_preprocess_islandora_pdfjs(array &$variables) {
   $fedora_object = $variables['fedora_object'];
   $dsid = (isset($variables['dsid']) ? $variables['dsid'] : NULL);
 
