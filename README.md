@@ -22,10 +22,12 @@ Note: If you use the Drush command, it is advisable to Move (not copy) the insta
 
 Currently the PDF.js viewer can be used as the viewer for:
 
-* the PDF Solution Pack 
-   * Administration » Islandora » Solution pack configuration » PDF Solution Pack (admin/islandora/solution_pack_config/pdf).
-* the Book Solution Pack (both the book and the page object are options)
-   * Administration  » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
+* the [PDF Solution Pack](https://github.com/Islandora/islandora_solution_pack_pdf) 
+  * Administration » Islandora » Solution pack configuration » PDF Solution Pack (admin/islandora/solution_pack_config/pdf).
+* the [Book Solution Pack](https://github.com/Islandora/islandora_solution_pack_book) (both the book and the page object are options)
+  * Administration » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
+* [Scholar](https://github.com/Islandora/islandora_scholar) 
+  * Administration » Islandora » Solution pack configuration » Scholar (admin/islandora/solution_pack_config/scholar). 
 
 ## Documentation
 
