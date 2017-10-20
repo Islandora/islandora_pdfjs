@@ -27,7 +27,7 @@ Currently the PDF.js viewer can be used as the viewer for:
 * the [Book Solution Pack](https://github.com/Islandora/islandora_solution_pack_book) (both the book and the page object are options)
   * Administration » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
 * the [Newspaper Solution Pack](https://github.com/Islandora/islandora_solution_pack_newspaper) (both the issue and the page object are options)
-  * Administration » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/book). 
+  * Administration » Islandora » Solution pack configuration » Book Solution Pack (admin/islandora/solution_pack_config/newspaper). 
 * [Scholar](https://github.com/Islandora/islandora_scholar) 
   * Administration » Islandora » Solution pack configuration » Scholar (admin/islandora/solution_pack_config/scholar). 
 
