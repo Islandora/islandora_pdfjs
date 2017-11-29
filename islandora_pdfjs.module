@@ -78,3 +78,78 @@ function islandora_pdfjs_viewer_callback(array $params, $fedora_object = NULL) {
     return theme('islandora_pdfjs', array('fedora_object' => $fedora_object, 'dsid' => $dsid));
   }
 }
+
+/**
+ * Implements hook_CMODEL_PID_islandora_solr_object_result_alter().
+ *
+ * Add page viewing fragment and search term to show all search results within
+ * book on page load.
+ */
+function islandora_pdfjs_islandora_bookCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $viewer_id = islandora_get_viewer_id('islandora_book_viewers');
+  if ($viewer_id != 'islandora_pdfjs') {
+    return;
+  }
+
+  $field_search = FALSE;
+  $fields = preg_split('/OR|AND|NOT/', $query_processor->solrQuery);
+  foreach ($fields as $field) {
+    if (preg_match('/^(.*):\(.*\)/', $field)) {
+      $field_search = TRUE;
+      break;
+    }
+  }
+
+  if ($query_processor->solrQuery != " " &&
+    $query_processor->solrQuery &&
+    !$field_search &&
+    $query_processor->solrQuery != '*:*') {
+    $search_results['object_url_params']['search'] = rawurlencode($query_processor->solrQuery);
+  }
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_solr_object_result_alter().
+ *
+ * Replaces the url for the search result to be the book's url, not the page.
+ * The page is added as a parameter at the end of the book url.
+ */
+function islandora_pdfjs_islandora_pageCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $viewer_id = islandora_get_viewer_id('islandora_book_viewers');
+  if ($viewer_id != 'islandora_pdfjs') {
+    return;
+  }
+
+  // Grab the names of the appropriate solr fields from the db.
+  $parent_book_field_name = variable_get('islandora_book_parent_book_solr_field', 'RELS_EXT_isMemberOf_uri_ms');
+  $page_number_field_name = variable_get('islandora_paged_content_page_number_solr_field', 'RELS_EXT_isSequenceNumber_literal_ms');
+  // If:
+  // there's an object url AND
+  // there's a solr doc AND
+  // the solr doc contains the parent book AND
+  // the solr doc contains the page number...
+  if (isset($search_results['object_url']) &&
+      isset($search_results['solr_doc']) &&
+      isset($search_results['solr_doc'][$parent_book_field_name]) &&
+      count($search_results['solr_doc'][$parent_book_field_name]) &&
+      isset($search_results['solr_doc'][$page_number_field_name]) &&
+      count($search_results['solr_doc'][$page_number_field_name])) {
+    // Replace the result url with that of the parent book and add the page
+    // number as a parameter.
+    $book_pid = preg_replace('/info\:fedora\//', '', $search_results['solr_doc'][$parent_book_field_name][0], 1);
+    $page_number = $search_results['solr_doc'][$page_number_field_name][0];
+
+    if (islandora_object_access(ISLANDORA_VIEW_OBJECTS, islandora_object_load($book_pid))) {
+      $search_results['object_url'] = "islandora/object/$book_pid";
+      $search_results['object_url_params']['page'] = $page_number;
+
+      // XXX: Won't handle fielded searches nicely... then again, if our
+      // highlighting field is not the one being search on, this makes sense?
+      if ($query_processor->solrDefType == 'dismax' || $query_processor->solrDefType == 'edismax') {
+        $search_results['object_url_params']['search'] = rawurlencode($query_processor->solrQuery);
+      }
+    }
+  }
+}
