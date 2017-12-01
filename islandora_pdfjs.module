@@ -81,31 +81,34 @@ function islandora_pdfjs_viewer_callback(array $params, $fedora_object = NULL) {
 
 /**
  * Implements hook_CMODEL_PID_islandora_solr_object_result_alter().
- *
- * Add page viewing fragment and search term to show all search results within
- * book on page load.
  */
 function islandora_pdfjs_islandora_bookCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer_id = islandora_get_viewer_id('islandora_book_viewers');
+  if ($viewer_id == 'islandora_pdfjs') {
+    islandora_pdfjs_add_solr_search_param($search_results, $query_processor);
+  }
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_solr_object_result_alter().
+ */
+function islandora_pdfjs_islandora_sp_pdf_islandora_solr_object_result_alter(&$search_results, $query_processor) {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $viewer_id = islandora_get_viewer_id('islandora_pdf_viewers');
+  if ($viewer_id == 'islandora_pdfjs') {
+    islandora_pdfjs_add_solr_search_param($search_results, $query_processor);
+  }
+}
+
+/**
+ * Implements hook_CMODEL_PID_islandora_solr_object_result_alter().
+ */
+function islandora_pdfjs_islandora_newspaperIssueCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
+  module_load_include('inc', 'islandora', 'includes/solution_packs');
+  $viewer_id = islandora_get_viewer_id('islandora_newspaper_issue_viewers');
   if ($viewer_id != 'islandora_pdfjs') {
-    return;
-  }
-
-  $field_search = FALSE;
-  $fields = preg_split('/OR|AND|NOT/', $query_processor->solrQuery);
-  foreach ($fields as $field) {
-    if (preg_match('/^(.*):\(.*\)/', $field)) {
-      $field_search = TRUE;
-      break;
-    }
-  }
-
-  if ($query_processor->solrQuery != " " &&
-    $query_processor->solrQuery &&
-    !$field_search &&
-    $query_processor->solrQuery != '*:*') {
-    $search_results['object_url_params']['search'] = rawurlencode($query_processor->solrQuery);
+    islandora_pdfjs_add_solr_search_param($search_results, $query_processor);
   }
 }
 
@@ -117,6 +120,12 @@ function islandora_pdfjs_islandora_bookCModel_islandora_solr_object_result_alter
  */
 function islandora_pdfjs_islandora_pageCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
   module_load_include('inc', 'islandora', 'includes/solution_packs');
+
+  $viewer_id = islandora_get_viewer_id('islandora_book_page_viewers');
+  if ($viewer_id == 'islandora_pdfjs') {
+    islandora_pdfjs_add_solr_search_param($search_results, $query_processor);
+  }
+
   $viewer_id = islandora_get_viewer_id('islandora_book_viewers');
   if ($viewer_id != 'islandora_pdfjs') {
     return;
@@ -144,12 +153,20 @@ function islandora_pdfjs_islandora_pageCModel_islandora_solr_object_result_alter
     if (islandora_object_access(ISLANDORA_VIEW_OBJECTS, islandora_object_load($book_pid))) {
       $search_results['object_url'] = "islandora/object/$book_pid";
       $search_results['object_url_params']['page'] = $page_number;
-
-      // XXX: Won't handle fielded searches nicely... then again, if our
-      // highlighting field is not the one being search on, this makes sense?
-      if ($query_processor->solrDefType == 'dismax' || $query_processor->solrDefType == 'edismax') {
-        $search_results['object_url_params']['search'] = rawurlencode($query_processor->solrQuery);
-      }
     }
+  }
+}
+
+/*
+ * Add search term to result url as a param to show all search results within the PDF.js viewer.
+ *
+ * @see hook_CMODEL_PID_islandora_solr_object_result_alter
+ */
+function islandora_pdfjs_add_solr_search_param(&$search_results, $query_processor) {
+  if ($query_processor->solrQuery != " " &&
+    $query_processor->solrQuery &&
+    $query_processor->solrQuery != '*:*' &&
+    ($query_processor->solrDefType == 'dismax' || $query_processor->solrDefType == 'edismax')) {
+    $search_results['object_url_params']['search'] = rawurlencode($query_processor->solrQuery);
   }
 }
