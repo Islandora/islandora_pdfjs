@@ -63,7 +63,7 @@ function islandora_pdfjs_islandora_viewer_info() {
  */
 function islandora_pdfjs_viewer_callback(array $params, $fedora_object = NULL) {
   $dsid = NULL;
-  if (isset($params['dsid']) && !empty($params['dsid']) && isset($fedora_object[$dsid])) {
+  if (isset($params['dsid']) && !empty($params['dsid']) && isset($fedora_object[$params['dsid']])) {
     $dsid = $params['dsid'];
   }
   else {
