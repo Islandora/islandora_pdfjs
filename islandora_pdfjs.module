@@ -157,8 +157,8 @@ function islandora_pdfjs_islandora_pageCModel_islandora_solr_object_result_alter
   }
 }
 
-/*
- * Add search term to result url as a param to show all search results within the PDF.js viewer.
+/**
+ * Add search term to result url as a param.
  *
  * @see hook_CMODEL_PID_islandora_solr_object_result_alter
  */
