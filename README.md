@@ -2,19 +2,20 @@
 
 ## Introduction
 
-An Islandora viewer module using [Mozilla PDF.js](http://mozilla.github.io/pdf.js/).
+An Islandora viewer module using [Mozilla PDF.js](https://mozilla.github.io/pdf.js/).
 
 ## Requirements
 
 * [Islandora](https://github.com/islandora/islandora)
 * [Tuque](https://github.com/islandora/tuque)
-* [PDF.js](http://mozilla.github.io/pdf.js/)
+* [Libraries](https://drupal.org/project/libraries)
+* [PDF.js](https://mozilla.github.io/pdf.js/)
 
 ## Installation
 
 Install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
 
-You also need to [Download](http://mozilla.github.io/pdf.js/getting_started/#download) and install the generic build of [PDF.js](http://mozilla.github.io/pdf.js) and move the directory to sites/libraries/pdfjs folder, or run `drush pdfjs-plugin`. 
+You also need to [Download](https://mozilla.github.io/pdf.js/getting_started/#download) and install the generic build of [PDF.js](https://mozilla.github.io/pdf.js) and move the directory to sites/all/libraries/pdfjs folder, or run `drush pdfjs-plugin`.
 
 Note: If you use the Drush command, ensure that your `.drush` directory contains the install script `islandora_pdfjs.drush.inc`. If it doesn't, move (not copy) the script from the `islandora_pdfjs` module's root directory to your `.drush` folder before you run the drush command.
 
