@@ -107,7 +107,7 @@ function islandora_pdfjs_islandora_sp_pdf_islandora_solr_object_result_alter(&$s
 function islandora_pdfjs_islandora_newspaperIssueCModel_islandora_solr_object_result_alter(&$search_results, $query_processor) {
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   $viewer_id = islandora_get_viewer_id('islandora_newspaper_issue_viewers');
-  if ($viewer_id != 'islandora_pdfjs') {
+  if ($viewer_id == 'islandora_pdfjs') {
     islandora_pdfjs_add_solr_search_param($search_results, $query_processor);
   }
 }
@@ -127,32 +127,30 @@ function islandora_pdfjs_islandora_pageCModel_islandora_solr_object_result_alter
   }
 
   $viewer_id = islandora_get_viewer_id('islandora_book_viewers');
-  if ($viewer_id != 'islandora_pdfjs') {
-    return;
-  }
+  if ($viewer_id == 'islandora_pdfjs') {
+    // Grab the names of the appropriate solr fields from the db.
+    $parent_book_field_name = variable_get('islandora_book_parent_book_solr_field', 'RELS_EXT_isMemberOf_uri_ms');
+    $page_number_field_name = variable_get('islandora_paged_content_page_number_solr_field', 'RELS_EXT_isSequenceNumber_literal_ms');
+    // If:
+    // there's an object url AND
+    // there's a solr doc AND
+    // the solr doc contains the parent book AND
+    // the solr doc contains the page number...
+    if (isset($search_results['object_url']) &&
+        isset($search_results['solr_doc']) &&
+        isset($search_results['solr_doc'][$parent_book_field_name]) &&
+        count($search_results['solr_doc'][$parent_book_field_name]) &&
+        isset($search_results['solr_doc'][$page_number_field_name]) &&
+        count($search_results['solr_doc'][$page_number_field_name])) {
+      // Replace the result url with that of the parent book and add the page
+      // number as a parameter.
+      $book_pid = preg_replace('/info\:fedora\//', '', $search_results['solr_doc'][$parent_book_field_name][0], 1);
+      $page_number = $search_results['solr_doc'][$page_number_field_name][0];
 
-  // Grab the names of the appropriate solr fields from the db.
-  $parent_book_field_name = variable_get('islandora_book_parent_book_solr_field', 'RELS_EXT_isMemberOf_uri_ms');
-  $page_number_field_name = variable_get('islandora_paged_content_page_number_solr_field', 'RELS_EXT_isSequenceNumber_literal_ms');
-  // If:
-  // there's an object url AND
-  // there's a solr doc AND
-  // the solr doc contains the parent book AND
-  // the solr doc contains the page number...
-  if (isset($search_results['object_url']) &&
-      isset($search_results['solr_doc']) &&
-      isset($search_results['solr_doc'][$parent_book_field_name]) &&
-      count($search_results['solr_doc'][$parent_book_field_name]) &&
-      isset($search_results['solr_doc'][$page_number_field_name]) &&
-      count($search_results['solr_doc'][$page_number_field_name])) {
-    // Replace the result url with that of the parent book and add the page
-    // number as a parameter.
-    $book_pid = preg_replace('/info\:fedora\//', '', $search_results['solr_doc'][$parent_book_field_name][0], 1);
-    $page_number = $search_results['solr_doc'][$page_number_field_name][0];
-
-    if (islandora_object_access(ISLANDORA_VIEW_OBJECTS, islandora_object_load($book_pid))) {
-      $search_results['object_url'] = "islandora/object/$book_pid";
-      $search_results['object_url_params']['page'] = $page_number;
+      if (islandora_object_access(ISLANDORA_VIEW_OBJECTS, islandora_object_load($book_pid))) {
+        $search_results['object_url'] = "islandora/object/$book_pid";
+        $search_results['object_url_params']['page'] = $page_number;
+      }
     }
   }
 }
