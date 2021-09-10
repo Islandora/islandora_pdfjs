@@ -8,7 +8,7 @@
 /**
  * The PDF.js plugin URI.
  */
-define('PDFJS_DOWNLOAD_URI', 'https://github.com/mozilla/pdf.js/releases/download/v1.10.88/pdfjs-1.10.88-dist.zip');
+define('PDFJS_DOWNLOAD_URI', 'https://github.com/mozilla/pdf.js/releases/download/v2.10.377/pdfjs-2.10.377-dist.zip');
 
 /**
  * The initial PDF.js directory
